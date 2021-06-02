@@ -88,6 +88,25 @@ MainWindow::MainWindow(QWidget *parent, Qt::WindowFlags flags)
     list_label->setEnabled(false);
 
     setAcceptDrops(true);
+    bindSlides();
+}
+
+void MainWindow::bindSlides()
+{
+    std::map<QSlider*, QDoubleSpinBox*> nameToBirthday = {
+            {horizontalSlider, spinbox_alpha},
+            {horizontalSlider_2, spinbox_scale},
+            {horizontalSlider_3, spinbox_pen_size},
+        };
+//    std::vector<QAbstractSpinBox*> spins = {spinbox_alpha, spinbox_scale, spinbox_pen_size,};
+    for (auto p : nameToBirthday){
+        auto slider = p.first;
+        auto spinbox = p.second;
+        slider->setRange(spinbox->minimum()*10, spinbox->maximum()*10);
+        connect(slider, &QSlider::valueChanged, this, [=](int v){
+            spinbox->setValue(v/10.0);
+        });
+    }
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent *e) {

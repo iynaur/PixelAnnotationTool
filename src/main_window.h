@@ -32,6 +32,7 @@ public:
 
 private:
 
+    void bindSlides();
 	void loadConfigLabels();
     void openDirectory();
     QString stringForShortCut(int id) const;

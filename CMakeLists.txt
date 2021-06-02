@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 project(PixelAnnotationTool)
 
-
+set(CMAKE_CXX_STANDARD 14)
 
 set(QT5_DIR "D:/Qt/Qt5.12.10/5.12.10/msvc2017_64/lib/cmake" CACHE STRING "Additional search paths for QT5")
 set(OpenCV_DIR "D:/dev/vcpkg/installed/x64-windows/share/opencv")
