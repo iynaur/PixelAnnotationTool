@@ -148,7 +148,7 @@ void ImageCanvas::mouseMoveEvent(QMouseEvent * e) {
 	update();
 }
 
-void ImageCanvas::setSizePen(int pen_size) {
+void ImageCanvas::setSizePen(double pen_size) {
 	_pen_size = pen_size;
 }
 

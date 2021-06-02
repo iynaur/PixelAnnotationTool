@@ -277,7 +277,7 @@ void MainWindow::updateConnect(const ImageCanvas * ic) {
     if (ic == NULL) return;
     connect(spinbox_scale, SIGNAL(valueChanged(double)), ic, SLOT(scaleChanged(double)));
     connect(spinbox_alpha, SIGNAL(valueChanged(double)), ic, SLOT(alphaChanged(double)));
-    connect(spinbox_pen_size, SIGNAL(valueChanged(int)), ic, SLOT(setSizePen(int)));
+    connect(spinbox_pen_size, SIGNAL(valueChanged(double)), ic, SLOT(setSizePen(double)));
 	connect(checkbox_watershed_mask, SIGNAL(clicked()), ic, SLOT(update()));
 	connect(checkbox_manuel_mask, SIGNAL(clicked()), ic, SLOT(update()));
 	connect(actionClear, SIGNAL(triggered()), ic, SLOT(clearMask()));
@@ -291,7 +291,7 @@ void MainWindow::allDisconnnect(const ImageCanvas * ic) {
     if (ic == NULL) return;
     disconnect(spinbox_scale, SIGNAL(valueChanged(double)), ic, SLOT(scaleChanged(double)));
     disconnect(spinbox_alpha, SIGNAL(valueChanged(double)), ic, SLOT(alphaChanged(double)));
-    disconnect(spinbox_pen_size, SIGNAL(valueChanged(int)), ic, SLOT(setSizePen(int)));
+    disconnect(spinbox_pen_size, SIGNAL(valueChanged(double)), ic, SLOT(setSizePen(double)));
     disconnect(checkbox_watershed_mask, SIGNAL(clicked()), ic, SLOT(update()));
     disconnect(checkbox_manuel_mask, SIGNAL(clicked()), ic, SLOT(update()));
     disconnect(actionClear, SIGNAL(triggered()), ic, SLOT(clearMask()));

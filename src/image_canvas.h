@@ -43,7 +43,7 @@ protected:
 public slots :
 	void scaleChanged(double);
 	void alphaChanged(double);
-	void setSizePen(int);
+    void setSizePen(double);
 	void clearMask();
 	void saveMask();
 	void undo();
