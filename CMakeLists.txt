@@ -3,7 +3,8 @@ project(PixelAnnotationTool)
 
 
 
-set(QT5_DIR "~/Qt5.9.1/5.9.1/msvc2015_64/lib/cmake" CACHE STRING "Additional search paths for QT5")
+set(QT5_DIR "D:/Qt/Qt5.12.10/5.12.10/msvc2017_64/lib/cmake" CACHE STRING "Additional search paths for QT5")
+set(OpenCV_DIR "D:/dev/vcpkg/installed/x64-windows/share/opencv")
 set(CMAKE_AUTOMOC ON)
 
 if(WIN32)
@@ -77,7 +78,10 @@ add_executable(PixelAnnotationTool MACOSX_BUNDLE WIN32
 target_link_libraries(PixelAnnotationTool Qt5::Gui Qt5::Widgets ${OpenCV_LIBS})	
 add_custom_command(TARGET PixelAnnotationTool PRE_BUILD COMMAND cmake -P ${CMAKE_BINARY_DIR}/git_version.cmake)
 
+set(OpenCV_LIB_PATH "D:/dev/vcpkg/installed/x64-windows/lib")
+set(OpenCV_BIN_D ${OpenCV_LIB_PATH}/../debug/bin)
 set(OpenCV_BIN ${OpenCV_LIB_PATH}/../bin)
+message("================${OpenCV_LIB_PATH}")
 set(NAME_RELEASE PixelAnnotationTool_${ARCH_TYPE}_v${PIXEL_ANNOTATION_VERSION})
 set(DIR_NAME_RELEASE ${CMAKE_CURRENT_BINARY_DIR}/${NAME_RELEASE})
 set_target_properties( PixelAnnotationTool PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${DIR_NAME_RELEASE})	
@@ -111,9 +115,9 @@ if( MSVC )  # ---------------------------- WINDOWS -----------------------------
                          "${QT5_DIR}/../../bin/Qt5Guid.dll"
                          "${QT5_DIR}/../../bin/Qt5Cored.dll")
     foreach( _comp ${OpenCV_MODULE_EXPORT})
-      set(DLLs_DEP_RELEASE ${DLLs_DEP_RELEASE} "${OpenCV_BIN}/${_comp}${CV_VERSION_NUMBER}.dll")
-      set(DLLs_DEP_DEBUG ${DLLs_DEP_DEBUG} "${OpenCV_BIN}/${_comp}${CV_VERSION_NUMBER}d.dll")
-      set(DLLs_DEP_RELEASE_DEPLOYMENT ${DLLs_DEP_RELEASE} "${CMAKE_CURRENT_BINARY_DIR}/${_comp}${CV_VERSION_NUMBER}.dll")
+      set(DLLs_DEP_RELEASE ${DLLs_DEP_RELEASE} "${OpenCV_BIN}/${_comp}.dll")
+      set(DLLs_DEP_DEBUG ${DLLs_DEP_DEBUG} "${OpenCV_BIN_D}/${_comp}d.dll")
+      set(DLLs_DEP_RELEASE_DEPLOYMENT ${DLLs_DEP_RELEASE} "${CMAKE_CURRENT_BINARY_DIR}/${_comp}.dll")
     endforeach()
     file(COPY ${DLLs_DEP_RELEASE} ${DLLs_DEP_DEBUG} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
     file(COPY ${DLLs_DEP_RELEASE_DEPLOYMENT} DESTINATION ${DIR_NAME_RELEASE})
